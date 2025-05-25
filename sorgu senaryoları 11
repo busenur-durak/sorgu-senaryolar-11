@@ -1,0 +1,31 @@
+1. Tüm first_name verilerini sıralayalım (birleşim – UNION):
+🔸 Tekil (tekrar etmeyen) veriler:
+SELECT first_name FROM actor
+UNION
+SELECT first_name FROM customer;
+🔸 Tekrar eden verilerle (TÜM veriler):
+SELECT first_name FROM actor
+UNION ALL
+SELECT first_name FROM customer;
+
+2. Kesişen verileri (ortak isimleri) sıralayalım:
+🔸 Tekil (tekrar etmeyen) ortak veriler:
+SELECT first_name FROM actor
+INTERSECT
+SELECT first_name FROM customer;
+🔸 Tekrar eden ortak veriler:
+SELECT first_name FROM actor
+INNER JOIN customer ON actor.first_name = customer.first_name
+ORDER BY actor.first_name;
+
+3. Sadece actor tablosunda olan ama customer tablosunda olmayan verileri listeleyelim:
+🔸 Tekil (tekrar etmeyen) veriler:
+SELECT first_name FROM actor
+EXCEPT
+SELECT first_name FROM customer;
+🔸 Tekrar eden (ALL) veriler:
+SELECT first_name 
+FROM actor
+WHERE first_name NOT IN (
+    SELECT first_name FROM customer
+);
